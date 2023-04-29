@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            color: #FFF;
+            max-width: 910px;
+            width: 100%;
+            display: grid;
+            grid-template: repeat(5, 1fr) / 1fr;
+        }
+        .twice {
+            width: 100px;
+            background: red;
+        }
+        .once {
+            width: 50px;
+            background: rgb(65, 65, 65);
+        }
+        .space {
+            width: 300px;
+            background: fuchsia;
+        }
+        .row {
+            display: flex;
+            padding: 5px 0;
+            justify-content: space-between;
+        }
+        .once, .twice, .space {
+            margin: 0 3px;
+            padding: 5px;
+        }
+        .on {
+            box-shadow: 0 0 10px 3px #ff3e3e;
+        }
+    </style>
+</head>
+<body>
+</body>
+<script src="index.js"></script>
+</html>
