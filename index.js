@@ -22,7 +22,7 @@ body.appendChild(container);
 const textarea = createElement('textarea', 'textarea');
 textarea.setAttribute('cols', '30');
 textarea.setAttribute('rows', '10');
-textarea.setAttribute('readonly', 'true');
+// textarea.setAttribute('readonly', 'true');   
 
 
 const notice = createElement('p', 'notice', `Alt + Shift: Switch Lang | Current lang: ${isEngLang ? 'Ru' : 'En'}`);
@@ -118,7 +118,7 @@ function generateKeyboard(arr) {
     document.querySelector('.notice').innerHTML = `Alt + Shift: Switch Lang | Current lang: ${isEngLang ? 'Ru' : 'En'}`
 
     keys.forEach(el => {
-
+    
         el.addEventListener('click', (e) => {
             if (e.target.innerText == 'CapsLock') {
                 if (caps) {
@@ -137,46 +137,49 @@ function generateKeyboard(arr) {
                 }
             }
             if (e.target.innerText == 'Shift') txtarea.value += '111';
-            else if (e.ctrlKey) txtarea.value += ''
-            else if (e.altKey) txtarea.value += ''
-            else if (e.target.innerText == 'Semicolon') txtarea.value += ''
-            else if (e.target.innerText == 'Ctrl') txtarea.value += ''
-            else if (e.target.innerText == 'Win') txtarea.value += ''
-            else if (e.target.innerText == 'Space') txtarea.value += ' '
-            else if (e.target.innerText == 'Quote') txtarea.value += '`'
-            else if (e.target.innerText == 'Comma') txtarea.value += ''
-            else if (e.target.innerText == 'Period') txtarea.value += ''
-            else if (e.target.innerText == 'CapsLock') txtarea.value += ''
-            else if (e.target.innerText == 'Tab') txtarea.value += '    '
-            else if (e.target.innerText == 'Alt') txtarea.value += ''
-            else if (e.target.innerText == 'Enter') txtarea.value += '\n'
-            else if (e.target.innerText == 'ArrowUp') txtarea.value += ''
-            else if (e.target.innerText == 'ArrowDown') txtarea.value += ''
-            else if (e.target.innerText == 'ArrowLeft') txtarea.value += ''
-            else if (e.target.innerText == 'ArrowRight') txtarea.value += ''
-            else if (e.target.innerText == 'Backspace') txtarea.value = txtarea.value.slice(0, -1)
-            else if (e.target.innerText == 'Delete') txtarea.value = txtarea.value.slice(0, -1)
-
-
+            else if (e.ctrlKey) txtarea.value += '';
+            else if (e.altKey) txtarea.value += '';
+            else if (e.target.innerText == 'Semicolon') txtarea.value += '';
+            else if (e.target.innerText == 'Ctrl') txtarea.value += '';
+            else if (e.target.innerText == 'Win') txtarea.value += '';
+            else if (e.target.innerText == 'Space') txtarea.value += ' ';
+            else if (e.target.innerText == 'Quote') txtarea.value += '`';
+            else if (e.target.innerText == 'Comma') txtarea.value += '';
+            else if (e.target.innerText == 'Period') txtarea.value += '';
+            else if (e.target.innerText == 'CapsLock') txtarea.value += '';
+            else if (e.target.innerText == 'Tab') txtarea.value += '    ';
+            else if (e.target.innerText == 'Alt') txtarea.value += '';
+            else if (e.target.innerText == 'Enter') txtarea.value += '\n';
+            else if (e.target.innerText == 'ArrowUp') txtarea.value += '▲';
+            else if (e.target.innerText == 'ArrowDown') txtarea.value += '▼';
+            else if (e.target.innerText == 'ArrowLeft') txtarea.value += '◄';
+            else if (e.target.innerText == 'ArrowRight') txtarea.value += '►';
+            else if (e.target.innerText == 'Backspace') txtarea.value = txtarea.value.slice(0, -1);
+            else if (e.target.innerText == 'Delete') txtarea.value = txtarea.value.slice(0, -1);
             else txtarea.value += el.innerText;
 
         });
     });
 }
 
-    console.log(isEngLang);
+
 
 if (isEngLang) {
-    console.log(1);
+
     generateKeyboard(arrRu);
 }
 else {
-    console.log(2);
+
     generateKeyboard(arrEn);
 }
 
 
 addEventListener('keydown', (e) => {
+
+
+
+    e.preventDefault();
+
     if (e.altKey && e.shiftKey) {
         if (e.repeat) return;
         isEngLang ? generateKeyboard(arrRu) : generateKeyboard(arrEn);
@@ -200,32 +203,35 @@ addEventListener('keydown', (e) => {
         else if (e.shiftKey && (elClass.includes('Quote'))) el.innerText = el.innerText.toUpperCase();
         else if (e.shiftKey && (elClass.includes('Comma'))) el.innerText = el.innerText.toUpperCase();
         else if (e.shiftKey && (elClass.includes('Period'))) el.innerText = el.innerText.toUpperCase();
-        
         if (el.classList.contains(`${e.code}`)) el.classList.add('on');
-    })
+    });
 
     if (e.shiftKey) txtarea.value += '';
     if (e.code == 'ShiftLeft' && e.key) txtarea.value += e.code != 'ShiftLeft' ? e.key.toUpperCase() : '';
-    else if (e.ctrlKey) txtarea.value += ''
-    else if (e.altKey) txtarea.value += ''
-    else if (e.key == 'Semicolon') txtarea.value += ''
-    else if (e.key == 'Quote') txtarea.value += ''
-    else if (e.key == 'Comma') txtarea.value += ''
-    else if (e.code == 'Space') txtarea.value += ' '
-    else if (e.key == 'Meta') txtarea.value += ''
-    else if (e.key == 'Period') txtarea.value += ''
-    else if (e.key == 'CapsLock') txtarea.value += ''
-    else if (e.key == 'Tab') txtarea.value += ''
-    else if (e.key == 'Alt') txtarea.value += ''
-    else if (e.key == 'Enter') txtarea.value += ''
-    else if (e.key == 'ArrowUp') txtarea.value += ''
-    else if (e.key == 'ArrowDown') txtarea.value += ''
-    else if (e.key == 'ArrowLeft') txtarea.value += ''
-    else if (e.key == 'ArrowRight') txtarea.value += ''
-    else if (e.key == 'Backspace') txtarea.value = txtarea.value.slice(0, -1)
-    else if (e.key == 'Delete') txtarea.value = txtarea.value.slice(0, -1)
+    else if (e.ctrlKey) txtarea.value += '';
+    else if (e.altKey) txtarea.value += '';
+    else if (e.key == 'Semicolon') txtarea.value += '';
+    else if (e.code == 'ShiftRight') txtarea.value += '';
+    else if (e.key == 'Quote') txtarea.value += '';
+    else if (e.key == 'Comma') txtarea.value += '';
+    else if (e.code == 'Space') txtarea.value += ' ';
+    else if (e.key == 'Meta') txtarea.value += '';
+    else if (e.key == 'Period') txtarea.value += '';
+    else if (e.key == 'CapsLock') txtarea.value += '';
+    else if (e.key == 'Tab') txtarea.value += '';
+    else if (e.key == 'Escape') txtarea.value += '';
+    else if (e.key == 'ScrollLock') txtarea.value += '';
+    else if (e.key == 'Pause') txtarea.value += '';
+    else if (e.key == 'Alt') txtarea.value += '';
+    else if (e.key == 'Enter') txtarea.value += '\n';
+    else if (e.key == 'ArrowUp') txtarea.value += '▲';
+    else if (e.key == 'ArrowDown') txtarea.value += '▼';
+    else if (e.key == 'ArrowLeft') txtarea.value += '◄';
+    else if (e.key == 'ArrowRight') txtarea.value += '►';
+    else if (e.key == 'Backspace') txtarea.value = txtarea.value.slice(0, -1);
+    else if (e.key == 'Delete') txtarea.value = txtarea.value.slice(0, -1);
+    else if (e.which >= 112 && e.which <= 123) txtarea.value = '';
     else txtarea.value += e.key;
-
 });
 
 addEventListener('keyup', (e) => {
@@ -250,7 +256,6 @@ addEventListener('keyup', (e) => {
         if (elClass.includes('Comma')) el.innerText = el.innerText.toLowerCase();
         if (elClass.includes('Period')) el.innerText = el.innerText.toLowerCase();
         if (el.classList.contains(`${e.code}`)) el.classList.remove('on');
-
         if (caps && elClass.includes('Key')) el.innerHTML = el.innerText.toUpperCase();
         else if ((!caps && elClass.includes('Key'))) el.innerText = el.innerText.toLowerCase();
 
