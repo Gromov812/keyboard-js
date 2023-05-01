@@ -22,6 +22,8 @@ body.appendChild(container);
 const textarea = createElement('textarea', 'textarea');
 textarea.setAttribute('cols', '30');
 textarea.setAttribute('rows', '10');
+textarea.setAttribute('readonly', 'true');
+
 
 const attention = createElement('p', 'p', 'Alt + Shift: Switch Lang');
 
