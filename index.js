@@ -3,11 +3,7 @@
 let caps = false;
 let isEngLang = JSON.parse(localStorage.getItem('engLang'));
 
-
-
-
 let body = document.querySelector('body');
-
 
 let onceKeys = document.querySelectorAll('.once');
 let twiceKeys = document.querySelectorAll('.twice');
@@ -22,14 +18,11 @@ body.appendChild(container);
 const textarea = createElement('textarea', 'textarea');
 textarea.setAttribute('cols', '30');
 textarea.setAttribute('rows', '10');
-// textarea.setAttribute('readonly', 'true');   
-
 
 const notice = createElement('p', 'notice', `Alt + Shift: Switch Lang | Current lang: ${isEngLang ? 'Ru' : 'En'}`);
 
 container.append(notice);
 container.append(textarea);
-
 
 function createElement(element, className, innerContent) {
     let elem = document.createElement(element);
@@ -37,7 +30,6 @@ function createElement(element, className, innerContent) {
     if (innerContent != undefined) elem.innerHTML = `${innerContent}`;
     return elem;
 }
-
 
 let keysRow1Specials = [["Backquote", "~"], ["Digit1", "!"], ["Digit2", "@"], ["Digit3", "#"], ["Digit4", "$"], ["Digit5", "%"], ["Digit6", "^"], ["Digit7", "&"], ["Digit8", "*"], ["Digit9", "("], ["Digit0", ")"], ["Minus", "_"], ["Equal", "+"], ["Backspace", "Backspace"]];
 let keysRow1RuSpecials = [["Backquote", "Ё"], ["Digit1", "!"], ["Digit2", "@"], ["Digit3", "#"], ["Digit4", "$"], ["Digit5", "%"], ["Digit6", "^"], ["Digit7", "&"], ["Digit8", "*"], ["Digit9", "("], ["Digit0", ")"], ["Minus", "_"], ["Equal", "+"], ["Backspace", "Backspace"]];
@@ -55,8 +47,6 @@ let keysRow4EnSpecials = [["ShiftLeft", "Shift"], ["KeyZ", "z"], ["KeyX", "x"], 
 let keysRow4Ru = [["ShiftLeft", "Shift"], ["KeyZ", "я"], ["KeyX", "ч"], ["KeyC", "с"], ["KeyV", "м"], ["KeyB", "и"], ["KeyN", "т"], ["KeyM", "ь"], ["Comma", "б"], ["Period", "ю"], ["Slash", "."], ["ArrowUp", "▲"], ["ShiftRight", "Shift"]];
 let keysRow4RuSpecials = [["ShiftLeft", "Shift"], ["KeyZ", "я"], ["KeyX", "ч"], ["KeyC", "с"], ["KeyV", "м"], ["KeyB", "и"], ["KeyN", "т"], ["KeyM", "ь"], ["Comma", "б"], ["Period", "ю"], ["Slash", ","], ["ArrowUp", "▲"], ["ShiftRight", "Shift"]];
 let keysRow5En = [["ControlLeft", "Ctrl"], ["MetaLeft", "Win"], ["AltLeft", "Alt"], ["Space", " "], ["AltRight", "Alt"], ["ControlRight", "Ctrl"], ["ArrowLeft", "◄"], ["ArrowDown", "▼"], ["ArrowRight", "►"]];
-
-
 
 let arrEn = [keysRow1En, keysRow2En, keysRow3En, keysRow4En, keysRow5En];
 let arrRu = [keysRow1Ru, keysRow2Ru, keysRow3Ru, keysRow4Ru, keysRow5En];
@@ -105,9 +95,7 @@ function generateKeyboard(arr) {
 
             rowElem.appendChild(keyElem)
         })
-
         container.appendChild(rowElem);
-
     })
 
     onceKeys = document.querySelectorAll('.once');
@@ -162,21 +150,14 @@ function generateKeyboard(arr) {
     });
 }
 
-
-
 if (isEngLang) {
-
     generateKeyboard(arrRu);
 }
 else {
-
     generateKeyboard(arrEn);
 }
 
-
 addEventListener('keydown', (e) => {
-
-
 
     e.preventDefault();
 
@@ -246,7 +227,6 @@ addEventListener('keyup', (e) => {
 
     keys.forEach(el => {
         let elClass = el.className;
-
         if (elClass.includes('Key', 'BracketRight')) el.innerText = el.innerText.toLowerCase();
         if (elClass.includes('BracketRight')) el.innerText = el.innerText.toLowerCase();
         if (elClass.includes('Backquote')) el.innerText = el.innerText.toLowerCase();
