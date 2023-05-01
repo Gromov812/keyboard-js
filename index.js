@@ -218,7 +218,7 @@ addEventListener('keydown', (e) => {
     else if (e.key == 'Meta') txtarea.value += '';
     else if (e.key == 'Period') txtarea.value += '';
     else if (e.key == 'CapsLock') txtarea.value += '';
-    else if (e.key == 'Tab') txtarea.value += '';
+    else if (e.key == 'Tab') txtarea.value += '    ';
     else if (e.key == 'Escape') txtarea.value += '';
     else if (e.key == 'ScrollLock') txtarea.value += '';
     else if (e.key == 'Pause') txtarea.value += '';
