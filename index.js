@@ -1,6 +1,10 @@
 'use strict'
 
 let caps = false;
+let isEngLang = false;
+
+   
+
 
 let body = document.querySelector('body');
 
@@ -25,19 +29,12 @@ container.append(attention);
 container.append(textarea);
 
 
-
-
-
-
-
-
 function createElement(element, className, innerContent) {
     let elem = document.createElement(element);
     if (className) elem.className = className;
     if (innerContent != undefined) elem.innerHTML = `${innerContent}`;
     return elem;
 }
-
 
 
 let keysRow1Specials = [["Backquote", "~"], ["Digit1", "!"], ["Digit2", "@"], ["Digit3", "#"], ["Digit4", "$"], ["Digit5", "%"], ["Digit6", "^"], ["Digit7", "&"], ["Digit8", "*"], ["Digit9", "("], ["Digit0", ")"], ["Minus", "_"], ["Equal", "+"], ["Backspace", "Backspace"]];
@@ -64,19 +61,12 @@ let arrRu = [keysRow1Ru, keysRow2Ru, keysRow3Ru, keysRow4Ru, keysRow5En];
 let arrRuSpecials = [keysRow1RuSpecials, keysRow2RuSpecials, keysRow3Ru, keysRow4RuSpecials, keysRow5En];
 let arrEnSpecials = [keysRow1Specials, keysRow2EnSpecials, keysRow3EnSpecials, keysRow4EnSpecials, keysRow5En];
 
-let isEngLang = false;
-
-
-
-
-
-
 
 function generateKeyboard(arr) {
 
     if (document.querySelectorAll('.row')) document.querySelectorAll('.row').forEach(el => el.remove());
 
-    arr.forEach((el, i) => {
+    arr.forEach((el) => {
         let rowElem = createElement('div', 'row');
         el.forEach(el => {
             let keyElem = createElement('div', 'once')
@@ -171,26 +161,18 @@ function generateKeyboard(arr) {
     });
 }
 
+
 generateKeyboard(arrEn);
 
-
-
 addEventListener('keydown', (e) => {
-    console.log(e.key, e.code, e);
-
-
     if (e.altKey && e.shiftKey) {
-        if (isEngLang) {
-            generateKeyboard(arrRu)
-            isEngLang = !isEngLang;
-        }
-        else {
-            generateKeyboard(arrEn)
-            isEngLang = !isEngLang;
-        }
+        if (e.repeat) return;
+        isEngLang ?  generateKeyboard(arrRu) : generateKeyboard(arrEn);
+        isEngLang = !isEngLang;
     }
 
     if (e.shiftKey) {
+        if (e.repeat) return;
         if (isEngLang) generateKeyboard(arrRuSpecials)
         else generateKeyboard(arrEnSpecials);
     }
@@ -205,9 +187,9 @@ addEventListener('keydown', (e) => {
         else if (e.shiftKey && (elClass.includes('Quote'))) el.innerText = el.innerText.toUpperCase();
         else if (e.shiftKey && (elClass.includes('Comma'))) el.innerText = el.innerText.toUpperCase();
         else if (e.shiftKey && (elClass.includes('Period'))) el.innerText = el.innerText.toUpperCase();
-        else if (el.classList.contains(`${e.code}`)) el.classList.add('on');
+        
+        if (el.classList.contains(`${e.code}`)) el.classList.add('on');
     })
-    console.log(e.code);
 
     if (e.shiftKey) txtarea.value += '';
     if (e.code == 'ShiftLeft' && e.key) txtarea.value += e.code != 'ShiftLeft' ? e.key.toUpperCase() : '';
@@ -216,6 +198,8 @@ addEventListener('keydown', (e) => {
     else if (e.key == 'Semicolon') txtarea.value += ''
     else if (e.key == 'Quote') txtarea.value += ''
     else if (e.key == 'Comma') txtarea.value += ''
+    else if (e.code == 'Space') txtarea.value += ' '
+    else if (e.key == 'Meta') txtarea.value += ''
     else if (e.key == 'Period') txtarea.value += ''
     else if (e.key == 'CapsLock') txtarea.value += ''
     else if (e.key == 'Tab') txtarea.value += ''
@@ -235,7 +219,8 @@ addEventListener('keyup', (e) => {
 
     if (e.code == 'CapsLock') caps = !caps;
 
-    if (e.code == 'ShiftLeft' || e.code == 'ShiftRight') {
+    if (e.shiftKey) {
+        if (e.repeat) return;
         if (isEngLang) generateKeyboard(arrRu)
         else generateKeyboard(arrEn);
     }
@@ -253,13 +238,8 @@ addEventListener('keyup', (e) => {
         if (elClass.includes('Period')) el.innerText = el.innerText.toLowerCase();
         if (el.classList.contains(`${e.code}`)) el.classList.remove('on');
 
-
         if (caps && elClass.includes('Key')) el.innerHTML = el.innerText.toUpperCase();
         else if ((!caps && elClass.includes('Key'))) el.innerText = el.innerText.toLowerCase();
 
     });
 });
-
-
-
-
