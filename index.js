@@ -1,9 +1,9 @@
 'use strict'
 
 let caps = false;
-let isEngLang = false;
+let isEngLang = JSON.parse(localStorage.getItem('engLang'));
 
-   
+
 
 
 let body = document.querySelector('body');
@@ -25,9 +25,9 @@ textarea.setAttribute('rows', '10');
 textarea.setAttribute('readonly', 'true');
 
 
-const attention = createElement('p', 'p', 'Alt + Shift: Switch Lang');
+const notice = createElement('p', 'notice', `Alt + Shift: Switch Lang | Current lang: ${isEngLang ? 'Ru' : 'En'}`);
 
-container.append(attention);
+container.append(notice);
 container.append(textarea);
 
 
@@ -115,6 +115,7 @@ function generateKeyboard(arr) {
     spaceKey = document.querySelector('.space');
     txtarea = document.querySelector('.textarea');
     keys = [...onceKeys, ...twiceKeys, spaceKey];
+    document.querySelector('.notice').innerHTML = `Alt + Shift: Switch Lang | Current lang: ${isEngLang ? 'Ru' : 'En'}`
 
     keys.forEach(el => {
 
@@ -163,14 +164,24 @@ function generateKeyboard(arr) {
     });
 }
 
+    console.log(isEngLang);
 
-generateKeyboard(arrEn);
+if (isEngLang) {
+    console.log(1);
+    generateKeyboard(arrRu);
+}
+else {
+    console.log(2);
+    generateKeyboard(arrEn);
+}
+
 
 addEventListener('keydown', (e) => {
     if (e.altKey && e.shiftKey) {
         if (e.repeat) return;
-        isEngLang ?  generateKeyboard(arrRu) : generateKeyboard(arrEn);
+        isEngLang ? generateKeyboard(arrRu) : generateKeyboard(arrEn);
         isEngLang = !isEngLang;
+        localStorage.setItem('engLang', isEngLang)
     }
 
     if (e.shiftKey) {
